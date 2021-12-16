@@ -6,3 +6,7 @@
 </h1>
 <%= link_to "ブログ新規作成画面へ", blogs_path%>
 <%= link_to 'ブログ一覧へ', blogs_path%>
+<% if current_user.id == @user.id %>
+  <%= link_to 'プロフィールを編集', edit_user_path(@user) %>
+<% else %>
+<% end %>
