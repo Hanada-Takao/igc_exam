@@ -1,0 +1,7 @@
+<p>メールアドレス: <%= @user.email %></p>
+<% provide(:title, @user.name) %>
+<h1>
+  <%= gravatar_for @user %>
+  <%= @user.name %>
+</h1>
+<%= link_to "ブログ新規作成画面へ", blogs_path%>
