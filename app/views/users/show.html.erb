@@ -1,12 +1,17 @@
 <p>メールアドレス: <%= @user.email %></p>
 <% provide(:title, @user.name) %>
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
 <%= link_to "ブログ新規作成画面へ", blogs_path%>
 <%= link_to 'ブログ一覧へ', blogs_path%>
 <% if current_user.id == @user.id %>
-  <%= link_to 'プロフィールを編集', edit_user_path(@user) %>
+<%= link_to 'プロフィールを編集', edit_user_path(@user) %>
 <% else %>
 <% end %>

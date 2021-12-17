@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-    skip_before_action :login_required, only: [:new]
-    before_action :logged_in_user, only: [:edit, :update]
-    before_action :correct_user,   only: [:edit, :update]
+  skip_before_action :login_required, only: [:new, :create]
+
 
     def new
         @user = User.new
@@ -10,7 +9,6 @@ class UsersController < ApplicationController
     def create
       @user = User.new(user_params)
       if @user.save
-        flash[:success] = "Welcome to the Sample App!"
         redirect_to user_path(@user.id)
       else
         render :new
@@ -39,19 +37,6 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                    :password_confirmation)
+                                   :password_confirmation)
     end
-
-    def logged_in_user
-      unless logged_in?
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
-
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(new_session_path) unless @user == current_user
-    end
-
 end

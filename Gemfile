@@ -14,10 +14,12 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bcrypt'
 gem 'carrierwave'
 gem 'mini_magick'
-
+gem 'will_paginate', '~> 3.3'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "faker"
 end
 
 group :development do
