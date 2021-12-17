@@ -1,5 +1,8 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :logged_in?, only:[:new,:create]
+
   def index
     @blogs = Blog.all
   end
@@ -55,7 +58,15 @@ class BlogsController < ApplicationController
   def blog_params
     params.require(:blog).permit(:title, :content, :user_id, :image, :image_cache)
   end
+
   def set_blog
     @blog = Blog.find(params[:id])
+  end
+
+  def correct_user
+    if current_user.id != @blog.user_id
+      flash[:notice] = "権限がないです"
+      redirect_to blogs_path
+    end
   end
 end
